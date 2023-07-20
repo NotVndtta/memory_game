@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css';
+import SingleCard from './components/SingleCard';
 const cardImages = [
   {"src": "/img/pr1.png"},
   {"src": "/img/pr2.png"},
@@ -14,8 +15,8 @@ function App() {
   const [turns, setTurns] = useState(0)
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
-    .sort(() => Math.random() - 0,5)
-    .map((card) => ({...card, id:Math.random() }))
+    .sort(() => Math.random() - 0.5)
+    .map((card) => ({...card, id: Math.random() }))
     setCards(shuffledCards)
     setTurns(0)
   }
@@ -24,7 +25,13 @@ function App() {
     <div className="App">
       <h1>Memory game</h1>
       <button onClick={shuffleCards}> Start Game</button>
-    </div>
+      <div className="card-grid">
+        {cards.map(card => (
+       <SingleCard key={card.id} card={card}/> 
+        )
+          )}
+        </div>   
+      </div>
   );
 }
 
